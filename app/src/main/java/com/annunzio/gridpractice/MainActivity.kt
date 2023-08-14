@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
@@ -60,9 +61,11 @@ fun CourseGridItem(course: Course, modifier: Modifier = Modifier){
                     .height(68.dp)
                     .width(68.dp),)
             Column {
-                Text(text = LocalContext.current.getString(course.courseTitleResourceId))
-                Image(painter = painterResource(id = R.drawable.ic_grain), contentDescription = "Grain image")
-                Text(text = course.associatedCourses.toString())
+                Text(text = LocalContext.current.getString(course.courseTitleResourceId), modifier = modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 8.dp))
+                Row {
+                    Image(painter = painterResource(id = R.drawable.ic_grain), contentDescription = "Grain image", modifier = modifier.padding(start = 16.dp, end = 8.dp))
+                    Text(text = course.associatedCourses.toString())
+                }
             }
         }
     }
