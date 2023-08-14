@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -24,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.annunzio.gridpractice.data.DataSource
 import com.annunzio.gridpractice.model.Course
 import com.annunzio.gridpractice.ui.theme.GridPracticeTheme
 
@@ -46,8 +48,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GridApp(){
-    
-
+    CourseGridLayout(coursesList = DataSource.DataSource.courses)
 }
 
 @Composable
@@ -71,9 +72,20 @@ fun CourseGridItem(course: Course, modifier: Modifier = Modifier){
     }
 }
 
+@Composable
+fun CourseGridLayout(coursesList : List<Course>, modifier: Modifier = Modifier){
+    LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 150.dp), modifier = modifier){
+        items(coursesList.size){course ->
+            CourseGridItem(coursesList[course])
+        }
+
+    }
+
+}
+
 
 @Composable
 @Preview
 private fun CardPreview(){
-    CourseGridItem(Course(R.string.business, 32, R.drawable.business))
+    GridApp()
 }
